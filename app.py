@@ -60,4 +60,5 @@ def download_image(filename):
         return "File not found", 404
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Updated to bind to 0.0.0.0 and use port 10000 as required by Render
+    app.run(host='0.0.0.0', port=10000, debug=True)
