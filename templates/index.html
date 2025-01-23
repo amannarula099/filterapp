@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Filter Application</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Image Filter Application</h1>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+      <label for="image" class="upload-label">Upload an Image:</label>
+      <input type="file" name="image" id="image" required>
+      <button type="submit" class="btn">Upload</button>
+    </form>
+
+    {% if uploaded_image %}
+    <div class="image-preview">
+      <h2>Uploaded Image</h2>
+      <img src="{{ url_for('static', filename='uploaded_images/' + uploaded_image) }}" alt="Uploaded Image">
+    </div>
+
+    <div class="filter-options">
+      <h2>Choose a Filter</h2>
+      <a href="/process/greyscale/{{ uploaded_image }}" class="btn">Apply Greyscale</a>
+      <a href="/process/blackandwhite/{{ uploaded_image }}" class="btn">Apply Black & White</a>
+    </div>
+    {% endif %}
+
+    {% if processed_image %}
+    <div class="image-preview">
+      <h2>Processed Image</h2>
+      <img src="{{ processed_image }}" alt="Processed Image">
+    </div>
+    <div class="download-button">
+      <a href="/download/{{ uploaded_image }}" class="btn">Download Processed Image</a>
+    </div>
+    {% endif %}
+  </div>
+</body>
+</html>
